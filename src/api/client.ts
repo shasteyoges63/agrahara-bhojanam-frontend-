@@ -1,4 +1,4 @@
-import type { ContactMessage, DeliveryRegion, Order, OrderMapPoint, Product, User } from '../types';
+import type { ContactMessage, DeliveryRegion, Order, OrderMapPoint, Product, User, WhatsAppConfig } from '../types';
 
 const API = (import.meta.env.VITE_API_BASE || '/api').replace(/\/$/, '');
 
@@ -59,4 +59,5 @@ export const api = {
     request<User>('/users/login', { method: 'POST', body: JSON.stringify(input) }),
   getOrderMapPoints: (region: DeliveryRegion | 'all' = 'all') =>
     request<OrderMapPoint[]>(`/orders/map-points?region=${region}`),
+  getWhatsApp: () => request<WhatsAppConfig>('/config/whatsapp'),
 };

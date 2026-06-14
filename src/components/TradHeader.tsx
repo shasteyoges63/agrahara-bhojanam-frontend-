@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ShoppingCart, User, ChevronDown, Menu, X, LogOut, Search } from 'lucide-react';
 import { SHOP_CATEGORIES } from '../data/siteContent';
 
@@ -28,12 +28,49 @@ export default function TradHeader({
   const [shopOpen, setShopOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
+  const shopMenuRef = useRef<HTMLDivElement>(null);
+  const accountMenuRef = useRef<HTMLDivElement>(null);
 
   const navClass = (tab: string) =>
     currentTab === tab ? 'ab-header-nav ab-header-nav-active' : 'ab-header-nav';
 
+  const pickCategory = (category: string) => {
+    setShopOpen(false);
+    setMobileOpen(false);
+    setAccountOpen(false);
+    onShopCategory(category);
+  };
+
+  useEffect(() => {
+    if (!shopOpen && !accountOpen) return;
+
+    const onPointerDown = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (shopOpen && shopMenuRef.current && !shopMenuRef.current.contains(target)) {
+        setShopOpen(false);
+      }
+      if (accountOpen && accountMenuRef.current && !accountMenuRef.current.contains(target)) {
+        setAccountOpen(false);
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setShopOpen(false);
+        setAccountOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [shopOpen, accountOpen]);
+
   return (
-    <header className="ab-site-header fixed top-0 left-0 right-0 w-full z-50 backdrop-blur-md shadow-sm no-print animate-header-enter">
+    <header className="ab-site-header fixed top-0 left-0 right-0 w-full z-[150] backdrop-blur-md shadow-sm no-print animate-header-enter isolate">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-[76px] gap-4">
           <button onClick={() => onChangeTab('home')} className="flex items-center gap-3 shrink-0 group">
@@ -50,20 +87,41 @@ export default function TradHeader({
             <button onClick={() => onChangeTab('home')} className={`pb-1 ${navClass('home')}`}>Home</button>
             <button onClick={() => onChangeTab('about')} className={`pb-1 ${navClass('about')}`}>About Us</button>
 
-            <div className="relative" onMouseEnter={() => setShopOpen(true)} onMouseLeave={() => setShopOpen(false)}>
-              <button className={`flex items-center gap-1 pb-1 ${navClass('products')}`}>
-                Categories <ChevronDown size={14} />
+            <div className="relative" ref={shopMenuRef}>
+              <button
+                type="button"
+                aria-expanded={shopOpen}
+                aria-haspopup="true"
+                onClick={() => {
+                  setAccountOpen(false);
+                  setShopOpen((open) => !open);
+                }}
+                className={`flex items-center gap-1 pb-1 ${navClass('products')} ${shopOpen ? 'text-[#5c1a1b]' : ''}`}
+              >
+                Categories
+                <ChevronDown size={14} className={`transition-transform duration-200 ${shopOpen ? 'rotate-180' : ''}`} />
               </button>
               {shopOpen && (
-                <div className="ab-header-dropdown absolute top-full left-0 mt-2 w-56 shadow-xl py-2 z-50">
-                  <button onClick={() => { onShopCategory('All'); setShopOpen(false); }} className="ab-header-dropdown-item block w-full text-left px-4 py-2.5 text-sm">
-                    All Products
-                  </button>
-                  {SHOP_CATEGORIES.map(c => (
-                    <button key={c.name} onClick={() => { onShopCategory(c.name); setShopOpen(false); }} className="ab-header-dropdown-item block w-full text-left px-4 py-2.5 text-sm">
-                      {c.name}
+                <div className="absolute top-full left-0 pt-2 z-[200] min-w-[14rem]">
+                  <div className="ab-header-dropdown shadow-2xl py-1.5">
+                    <button
+                      type="button"
+                      onClick={() => pickCategory('All')}
+                      className="ab-header-dropdown-item block w-full text-left px-4 py-2.5 text-sm font-medium"
+                    >
+                      All Products
                     </button>
-                  ))}
+                    {SHOP_CATEGORIES.map((c) => (
+                      <button
+                        key={c.name}
+                        type="button"
+                        onClick={() => pickCategory(c.name)}
+                        className="ab-header-dropdown-item block w-full text-left px-4 py-2.5 text-sm"
+                      >
+                        {c.name}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -90,17 +148,23 @@ export default function TradHeader({
             </button>
 
             {customerName ? (
-              <div className="relative">
+              <div className="relative" ref={accountMenuRef}>
                 <button
-                  onClick={() => setAccountOpen(!accountOpen)}
+                  type="button"
+                  aria-expanded={accountOpen}
+                  onClick={() => {
+                    setShopOpen(false);
+                    setAccountOpen((open) => !open);
+                  }}
                   className="ab-header-link flex items-center gap-1.5 text-sm font-medium px-1"
                 >
                   <User size={18} />
                   <span className="hidden sm:inline max-w-[120px] truncate">{customerName.split(' ')[0]}</span>
-                  <ChevronDown size={14} />
+                  <ChevronDown size={14} className={`transition-transform duration-200 ${accountOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {accountOpen && (
-                  <div className="ab-header-dropdown absolute right-0 top-full mt-2 w-44 shadow-xl py-1 z-50">
+                  <div className="absolute right-0 top-full pt-2 z-[200] min-w-[11rem]">
+                    <div className="ab-header-dropdown shadow-2xl py-1">
                     <button
                       onClick={() => { onChangeTab('cart'); setAccountOpen(false); }}
                       className="ab-header-dropdown-item block w-full text-left px-4 py-2.5 text-sm"
@@ -119,6 +183,7 @@ export default function TradHeader({
                     >
                       <LogOut size={14} /> Logout
                     </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -145,8 +210,20 @@ export default function TradHeader({
           <button onClick={() => { onChangeTab('home'); setMobileOpen(false); }} className="ab-header-mobile-link block w-full text-left py-2.5 font-medium">Home</button>
           <button onClick={() => { onChangeTab('about'); setMobileOpen(false); }} className="ab-header-mobile-link block w-full text-left py-2.5 font-medium">About Us</button>
           <p className="ab-header-brand-sub text-xs uppercase tracking-wider pt-2 px-1 font-semibold">Categories</p>
-          {SHOP_CATEGORIES.map(c => (
-            <button key={c.name} onClick={() => { onShopCategory(c.name); setMobileOpen(false); }} className="ab-header-mobile-muted block w-full text-left py-2 pl-3 text-sm">
+          <button
+            type="button"
+            onClick={() => pickCategory('All')}
+            className="ab-header-mobile-muted block w-full text-left py-2 pl-3 text-sm font-medium"
+          >
+            All Products
+          </button>
+          {SHOP_CATEGORIES.map((c) => (
+            <button
+              key={c.name}
+              type="button"
+              onClick={() => pickCategory(c.name)}
+              className="ab-header-mobile-muted block w-full text-left py-2 pl-3 text-sm"
+            >
               {c.name}
             </button>
           ))}

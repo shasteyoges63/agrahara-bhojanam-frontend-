@@ -1,11 +1,13 @@
 import React from 'react';
-import { ArrowRight, Leaf, Award, Heart, Shield, Crown, ChefHat } from 'lucide-react';
+import { ArrowRight, Leaf, Award, Heart, Shield, ChefHat } from 'lucide-react';
 import { Product } from '../types';
-import { SHOP_CATEGORIES, TRUST_BADGES, HOW_IT_WORKS, HOW_IT_WORKS_DEFAULT_IMAGE, HERO_IMAGE, categoryImageFor } from '../data/siteContent';
+import { SHOP_CATEGORIES, TRUST_BADGES, HOW_IT_WORKS, categoryImageFor } from '../data/siteContent';
 import ProductCard from './ProductCard';
 import TestimonialsSection from './TestimonialsSection';
 import HowItWorksStepCard from './HowItWorksStepCard';
+import HowItWorksGallery from './HowItWorksGallery';
 import CategoriesSection from './CategoriesSection';
+import HeroCarousel from './HeroCarousel';
 
 interface HomePageProps {
   products: Product[];
@@ -19,13 +21,6 @@ interface HomePageProps {
 
 const TRUST_ICONS = [Heart, Leaf, Shield, Award, ChefHat];
 
-const ROYAL_STATS = [
-  { value: '25+', label: 'Years Heritage' },
-  { value: '100%', label: 'Pure Vegetarian' },
-  { value: '5', label: 'Royal Collections' },
-  { value: '0', label: 'Preservatives' },
-];
-
 export default function HomePage({ products, onChangeTab, onShopCategory, onSelectProduct, onPreviewProduct, onReviewProduct, onAddToCart }: HomePageProps) {
   const enabled = products.filter(p => p.enabled);
   const bestSelling = enabled.slice(0, 4);
@@ -33,56 +28,7 @@ export default function HomePage({ products, onChangeTab, onShopCategory, onSele
 
   return (
     <div className="animate-content-enter ab-home-page">
-      {/* Royal Hero */}
-      <section className="ab-hero-royal">
-        <div className="max-w-7xl mx-auto px-4 pt-10 pb-14 md:pt-14 md:pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="space-y-7 text-center lg:text-left order-2 lg:order-1">
-              <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                <span className="ab-royal-badge">Madurai · Agraharam Heritage</span>
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#5c1a1b] text-[#f5e6b8] border border-[#c9a227]/40">
-                  <Crown size={11} className="text-[#c9a227]" /> Royal Kitchen
-                </span>
-              </div>
-              <h1 className="ab-hero-title font-serif text-3xl md:text-5xl lg:text-[3.25rem] font-bold text-[#5c1a1b] leading-[1.15]">
-                Authentic Royal Taste From Our Agraharam Kitchen
-              </h1>
-              <div className="ab-royal-divider lg:mx-0 max-w-xs" />
-              <p className="ab-hero-desc text-[#4a3728] text-sm md:text-base max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                Stone-ground podis, sun-dried vathal, and traditional pickles — Brahmin recipes from Madurai, crafted with purity, devotion, and generations of love.
-              </p>
-              <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                <button onClick={() => onChangeTab('products')} className="ab-btn-primary px-8 py-3.5 rounded-full text-sm font-semibold shadow-lg inline-flex items-center gap-2">
-                  Shop Collection <ArrowRight size={16} />
-                </button>
-                <button onClick={() => onChangeTab('about')} className="ab-btn-outline px-8 py-3.5 rounded-full text-sm font-semibold">
-                  Our Story
-                </button>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 max-w-lg mx-auto lg:mx-0">
-                {ROYAL_STATS.map(s => (
-                  <div key={s.label} className="ab-royal-stat-card">
-                    <p className="ab-royal-stat-value">{s.value}</p>
-                    <p className="ab-royal-stat-label">{s.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative flex justify-center order-1 lg:order-2">
-              <div className="relative w-full max-w-md lg:max-w-lg">
-                <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-[#c9a227]/30 rounded-full" aria-hidden="true" />
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 border border-[#c9a227]/20 rounded-2xl rotate-6" aria-hidden="true" />
-                <div className="absolute -inset-4 bg-gradient-to-br from-[#c9a227]/15 to-[#5c1a1b]/5 rounded-3xl blur-2xl" aria-hidden="true" />
-                <img
-                  src={HERO_IMAGE}
-                  alt="Traditional spices and homemade foods"
-                  className="relative w-full h-auto object-contain rounded-2xl shadow-2xl border-2 border-[#c9a227]/30"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel onChangeTab={onChangeTab} />
 
       {/* Featured collections — royal horizontal banners */}
       <section className="ab-section-band py-10 md:py-14">
@@ -186,14 +132,7 @@ export default function HomePage({ products, onChangeTab, onShopCategory, onSele
                 <HowItWorksStepCard key={step.title} index={i} title={step.title} desc={step.desc} />
               ))}
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-xl border-2 border-[#c9a227]/25 relative">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#5c1a1b] via-[#c9a227] to-[#5c1a1b] z-10" />
-              <img
-                src={HOW_IT_WORKS_DEFAULT_IMAGE}
-                alt="Traditional masala podi and spices"
-                className="w-full h-full object-cover min-h-[280px] lg:min-h-[400px]"
-              />
-            </div>
+            <HowItWorksGallery />
           </div>
         </div>
       </section>

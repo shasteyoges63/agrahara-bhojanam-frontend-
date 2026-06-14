@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ShoppingCart, LogIn, UserPlus, ArrowLeft, CheckCircle, MessageCircle, MailCheck, ShieldCheck, Download, Printer, FileText } from 'lucide-react';
 import { Product, CartItem, Order, OrderStatus } from '../types';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import CartLineItem, { formatInr } from './CartLineItem';
+import { api } from '../api/client';
+import { STORE_WHATSAPP_DISPLAY, STORE_WHATSAPP_NUMBER } from '../constants/contact';
 
 interface CustomerPagesProps {
   currentTab: string;
@@ -48,6 +50,16 @@ export default function CustomerPages({
   // Invoice toggle & downloading progress states
   const [showInvoiceModal, setShowInvoiceModal] = useState(false);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const [whatsappRecipient, setWhatsappRecipient] = useState(STORE_WHATSAPP_NUMBER);
+
+  useEffect(() => {
+    api.getWhatsApp()
+      .then((cfg) => {
+        const n = cfg.recipientNumber?.replace(/\D/g, '');
+        if (n) setWhatsappRecipient(n);
+      })
+      .catch(() => {});
+  }, []);
 
   const getOrderStatusBadgeClass = (status: OrderStatus) => {
     switch (status) {
@@ -252,6 +264,7 @@ export default function CustomerPages({
 
     setOrderLoading(true);
     setOrderError('');
+    const whatsappWindow = window.open('about:blank', '_blank');
     try {
       const completedOrder = await onPlaceOrder({
         customerName: checkoutForm.name,
@@ -263,10 +276,19 @@ export default function CustomerPages({
       });
 
       if (completedOrder) {
-        setActiveOrder(completedOrder);
+        const whatsappUrl = getWhatsAppURL(completedOrder);
+        if (whatsappWindow) {
+          whatsappWindow.location.href = whatsappUrl;
+        } else {
+          window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
+        setActiveOrder({ ...completedOrder, whatsappSent: true });
         onChangeTab('order-confirmation');
+      } else if (whatsappWindow) {
+        whatsappWindow.close();
       }
     } catch (err) {
+      if (whatsappWindow) whatsappWindow.close();
       setOrderError(err instanceof Error ? err.message : 'Could not place your order. Please try again.');
     } finally {
       setOrderLoading(false);
@@ -275,7 +297,7 @@ export default function CustomerPages({
 
   // Generate Web WhatsApp Pre-filled text URL (Real Dynamic WhatsApp notification links)
   const getWhatsAppURL = (order: Order) => {
-    const defaultRecipient = '918838026509'; // Store owner
+    const recipient = whatsappRecipient.replace(/\D/g, '') || STORE_WHATSAPP_NUMBER;
     const itemsText = order.items.map(it => `• ${it.productName} [Qty: ${it.quantity} @ ₹${it.price}]`).join('%0A');
     const msg = `🌿 Welcome! AGRAHARA BHOJANAM ORDER CONFIRMED 🌿%0A%0A` +
                 `*Invoice:* ${order.invoiceNumber}%0A` +
@@ -288,7 +310,7 @@ export default function CustomerPages({
                 `*Total Grand Price:* ₹${order.totalPrice}%0A` +
                 `*Payment Selected:* ${order.paymentMethod}%0A%0A` +
                 `Please process our traditional food order. Thank you.`;
-    return `https://wa.me/${defaultRecipient}?text=${msg}`;
+    return `https://wa.me/${recipient}?text=${msg}`;
   };
 
   // 1. CUSTOMER LOGIN & REGISTER SCREEN
@@ -682,7 +704,7 @@ export default function CustomerPages({
                   {orderLoading ? 'Placing your order...' : `🌿 Confirm & Place Order (₹${cartSubtotal})`}
                 </button>
                 <span className="text-[9px] ab-muted font-sans pt-1">
-                  *Our team processes delivery slips securely through SMTP system notifications.*
+                  Your invoice will be emailed and our kitchen team will be notified automatically.
                 </span>
               </div>
             </div>
@@ -694,153 +716,116 @@ export default function CustomerPages({
     );
   }
 
-  // 4. ORDER CONFIRMATION VIEW (Prasadam voucher & notifications status logs)
+  // 4. ORDER CONFIRMATION — order slip & delivery details only
   if (currentTab === 'order-confirmation' && activeOrder) {
     const o = activeOrder;
     return (
       <>
-      <div className="order-confirmation-page no-print max-w-3xl mx-auto animate-bloom px-4 py-8">
-        <div className="ab-section-panel rounded-2xl p-6 md:p-10 space-y-6 my-4">
-        
-        {/* Fresh Confirmation Banner Header */}
+      <div className="order-confirmation-page no-print max-w-lg mx-auto animate-bloom px-4 py-8">
+        <div className="ab-section-panel rounded-2xl p-6 md:p-8 space-y-6 my-4">
+
         <div className="ab-card p-6 rounded-2xl text-center space-y-2 shadow-xs">
           <CheckCircle className="text-[#c9a227] mx-auto w-12 h-12" />
           <div className="ab-section-heading mb-2"><h2 className="text-xl md:text-2xl">
             Your Traditional Order is Placed!
           </h2></div>
           <p className="text-xs ab-muted max-w-lg mx-auto font-sans">
-            Thank you, <strong>{o.customerName}</strong>. Your traditional food order has been recorded. Our kitchen team is hand-packaging your items!
+            Thank you, <strong>{o.customerName}</strong>. Your order has been recorded and our kitchen team is hand-packaging your items.
           </p>
         </div>
 
-        {/* Outer Grid: Voucher Info & Notifications Simulator */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-          
-          {/* THE TRADITIONAL ORDER COUPON */}
-          <div className="ab-card p-6 rounded-2xl border border-dashed border-[#5c1a1b]/30 shadow-xs space-y-4 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#5c1a1b]" />
-            
-            <div className="flex justify-between items-start pt-2">
-              <div>
-                <span className="text-[10px] bg-black/40 text-[#c9a227] px-2 py-0.5 rounded font-bold font-sans uppercase tracking-wider">
-                  AGRAHARA ORDER SLIP
-                </span>
-                <span className="text-[10px] ab-muted font-mono block mt-1">INVOICE: <strong>{o.invoiceNumber}</strong></span>
-              </div>
-              <span className="bg-[#5c1a1b] text-white text-[9px] px-2.5 py-0.5 rounded font-bold uppercase tracking-wider">
-                {o.paymentMethod}
+        <div className="ab-card p-6 rounded-2xl border border-dashed border-[#5c1a1b]/30 shadow-xs space-y-4 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#5c1a1b]" />
+
+          <div className="flex justify-between items-start pt-2">
+            <div>
+              <span className="text-[10px] bg-black/40 text-[#c9a227] px-2 py-0.5 rounded font-bold font-sans uppercase tracking-wider">
+                AGRAHARA ORDER SLIP
               </span>
+              <span className="text-[10px] ab-muted font-mono block mt-1">INVOICE: <strong>{o.invoiceNumber}</strong></span>
             </div>
-
-            <div className="border-b border-[#c9a227]/20 my-3" />
-
-            <div className="space-y-3.5 text-xs font-sans ab-muted">
-              <div>
-                <p className="ab-h font-bold">Consignee Coordinates:</p>
-                <p className="text-[11px] leading-relaxed pl-2 bg-[#fff8f0] mt-1 p-2.5 rounded-lg border border-[#c9a227]/20 ab-p">
-                  Name: {o.customerName}<br />
-                  Phone: {o.customerPhone}<br />
-                  Address: {o.customerAddress}
-                </p>
-              </div>
-              
-              <div className="pt-1">
-                <p className="pb-1 font-bold ab-h">Ordered Traditional Items:</p>
-                <div className="space-y-1.5 pl-2 border-l-2 border-[#5c1a1b]/15">
-                  {o.items.map((it, i) => (
-                    <div key={i} className="flex justify-between text-[11px] leading-tight ab-muted">
-                      <span>{it.productName} <strong className="text-[#c9a227]">x {it.quantity}</strong></span>
-                      <span className="ab-h font-bold">₹ {it.price * it.quantity}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="border-t border-[#c9a227]/20 pt-3 flex justify-between font-bold text-[#c9a227] text-sm">
-                <span>Total Package Price:</span>
-                <span>₹ {o.totalPrice}</span>
-              </div>
-            </div>
-
-            <div className="border-t border-dashed border-[#c9a227]/20 pt-3 text-center space-y-2.5">
-              <span className="text-[9px] font-mono ab-muted block">Recorded At: {new Date(o.orderDate).toLocaleString()}</span>
-              
-              <button
-                type="button"
-                onClick={() => setShowInvoiceModal(true)}
-                className="w-full inline-flex items-center justify-center gap-1.5 ab-btn-primary rounded-lg py-2 px-3 font-sans font-bold text-[10.5px] uppercase tracking-wider transition-all shadow-xs cursor-pointer select-none active:scale-95"
-              >
-                <FileText size={13} /> View & Download Invoice PDF
-              </button>
-
-              <p className="text-[10px] font-bold text-[#c9a227] font-sans uppercase tracking-widest pt-0.5">🌱 Handcrafted Traditional Heritage 🌱</p>
-            </div>
-
+            <span className="bg-[#5c1a1b] text-white text-[9px] px-2.5 py-0.5 rounded font-bold uppercase tracking-wider">
+              {o.paymentMethod}
+            </span>
           </div>
 
-          {/* DYNAMIC NOTIFICATIONS ACTIONS */}
-          <div className="ab-card ab-h p-5 rounded-2xl shadow-xs space-y-4 font-mono text-xs">
-            
-            <h4 className="text-[#c9a227] font-sans font-bold border-b border-[#c9a227]/20 pb-2 flex items-center gap-1.5 uppercase text-xs">
-              <span>🔔</span> System Integration Core
-            </h4>
+          <div className="border-b border-[#c9a227]/20 my-3" />
 
-            {/* A. WhatsApp Trigger Notification */}
-            <div className="space-y-2 bg-[#fff8f0] p-3.5 rounded-xl border border-[#c9a227]/20">
-              <p className="font-bold text-[11px] text-emerald-800 flex items-center gap-1 font-sans">
-                🟢 WHATSAPP ORDER NOTIFIER
-              </p>
-              <p className="text-[9.5px] ab-muted leading-relaxed font-sans">
-                We've generated a real pre-filled WhatsApp text containing invoice itemization for the store admin. Click below to launch Web WhatsApp directly!
-              </p>
-              
-              <div className="pt-2">
-                <a 
-                  href={getWhatsAppURL(o)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 ab-btn-primary rounded py-2.5 px-3 font-bold active:scale-95 transition-all select-none text-[10px] uppercase font-sans tracking-wider cursor-pointer"
-                >
-                  <MessageCircle size={14} /> Send WhatsApp Alert
-                </a>
-              </div>
-            </div>
-
-            {/* B. SMTP Notification Logs */}
-            <div className="space-y-2 bg-[#faf9f5] p-3.5 rounded-xl border border-[#eadeca]">
-              <p className="font-bold text-[11.5px] text-[#d4af37] flex items-center gap-1 font-sans uppercase tracking-wider">
-                📨 SMTP Mail Transfer Core
-              </p>
-              
-              <div className="p-2 sm:p-2.5 bg-neutral-900 text-neutral-100 text-[10px] space-y-1.5 rounded-lg border border-neutral-800 h-32 overflow-y-auto font-mono scrollbar-none leading-relaxed">
-                <div className="text-stone-400">[SYSTEM] Initializing secure SMTP Mail Delivery...</div>
-                <div className="text-stone-300">[SMTP] Host identified: mail.agraharabhojanam.com</div>
-                <div className="text-stone-300">[SMTP] TLS completed. Port 465 SSL Secure.</div>
-                <div className="text-amber-200">[SMTP] Preparing parcel slip to: {o.customerEmail}</div>
-                <div className="text-amber-200">[SMTP] Sending HTML Template "Order Invoice receipt"</div>
-                <div className="text-emerald-400 font-bold">✓ [SMTP SUCCESS] Mail delivered successfully. Receipt issued.</div>
-              </div>
-
-              <p className="text-[9px] text-[#ebdcc9] italic font-sans">
-                *Uses real configured merchant credentials.*
+          <div className="space-y-3.5 text-xs font-sans ab-muted">
+            <div>
+              <p className="ab-h font-bold">Delivery Address</p>
+              <p className="text-[11px] leading-relaxed pl-2 bg-[#fff8f0] mt-1 p-2.5 rounded-lg border border-[#c9a227]/20 ab-p">
+                <strong>{o.customerName}</strong><br />
+                {o.customerPhone}<br />
+                {o.customerAddress}
               </p>
             </div>
 
-            {/* C. Return back home option */}
+            <div className="pt-1">
+              <p className="pb-1 font-bold ab-h">Ordered Items</p>
+              <div className="space-y-1.5 pl-2 border-l-2 border-[#5c1a1b]/15">
+                {o.items.map((it, i) => (
+                  <div key={i} className="flex justify-between text-[11px] leading-tight ab-muted">
+                    <span>{it.productName} <strong className="text-[#c9a227]">× {it.quantity}</strong></span>
+                    <span className="ab-h font-bold">₹ {it.price * it.quantity}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-[#c9a227]/20 pt-3 flex justify-between font-bold text-[#c9a227] text-sm">
+              <span>Total</span>
+              <span>₹ {o.totalPrice}</span>
+            </div>
+          </div>
+
+          <div className="border-t border-dashed border-[#c9a227]/20 pt-3 text-center space-y-2.5">
+            <span className="text-[9px] font-mono ab-muted block">Placed on {new Date(o.orderDate).toLocaleString()}</span>
+
             <button
-              onClick={() => {
-                setActiveOrder(null);
-                onClearCart();
-                onChangeTab('products');
-              }}
-              className="w-full bg-[#fff8f0] hover:bg-black/50 text-[#c9a227] border border-[#c9a227]/20 rounded-lg py-2.5 font-sans font-bold text-center select-none text-[11px] cursor-pointer transition-all"
+              type="button"
+              onClick={() => setShowInvoiceModal(true)}
+              className="w-full inline-flex items-center justify-center gap-1.5 ab-btn-primary rounded-lg py-2 px-3 font-sans font-bold text-[10.5px] uppercase tracking-wider transition-all shadow-xs cursor-pointer select-none active:scale-95"
             >
-              ← Done. Return to Heritage Store
+              <FileText size={13} /> View & Download Invoice PDF
             </button>
 
+            <p className="text-[10px] font-bold text-[#c9a227] font-sans uppercase tracking-widest pt-0.5">🌱 Handcrafted Traditional Heritage 🌱</p>
           </div>
-
         </div>
+
+        <div className="space-y-2.5">
+          {o.emailSent ? (
+            <div className="flex items-start gap-2.5 text-[11px] text-emerald-900 bg-emerald-50 border border-emerald-200/80 rounded-xl p-3 font-sans">
+              <MailCheck size={16} className="shrink-0 mt-0.5 text-emerald-700" />
+              <span>Invoice confirmation email sent to <strong>{o.customerEmail}</strong></span>
+            </div>
+          ) : (
+            <div className="flex items-start gap-2.5 text-[11px] text-amber-900 bg-amber-50 border border-amber-200/80 rounded-xl p-3 font-sans">
+              <MailCheck size={16} className="shrink-0 mt-0.5 text-amber-700" />
+              <span>Email could not be sent — ask the store to configure SMTP in Admin panel, or our team will confirm by phone.</span>
+            </div>
+          )}
+          {o.whatsappSent && (
+            <div className="flex items-start gap-2.5 text-[11px] text-emerald-900 bg-emerald-50 border border-emerald-200/80 rounded-xl p-3 font-sans">
+              <MessageCircle size={16} className="shrink-0 mt-0.5 text-emerald-700" />
+              <span>WhatsApp order alert sent to our kitchen team.</span>
+            </div>
+          )}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => {
+            setActiveOrder(null);
+            onClearCart();
+            onChangeTab('products');
+          }}
+          className="w-full bg-[#fff8f0] hover:bg-[#5c1a1b]/5 text-[#5c1a1b] border border-[#c9a227]/30 rounded-lg py-3 font-sans font-bold text-center text-sm cursor-pointer transition-all"
+        >
+          ← Continue Shopping
+        </button>
+
         </div>
       </div>
 
@@ -855,7 +840,7 @@ export default function CustomerPages({
                       <h3 className="ab-invoice-brand-title">Agrahara Bhojanam</h3>
                       <p className="text-[0.65rem] text-[#e8d48b]/85 mt-1 max-w-sm">
                         Temple Road, Srirangam, Madurai, Tamil Nadu 625001<br />
-                        admin@agraharabhojanam.com · +91 90256 72285
+                        admin@agraharabhojanam.com · {STORE_WHATSAPP_DISPLAY}
                       </p>
                       <span className="ab-invoice-fssai">FSSAI 22421008000213</span>
                     </div>

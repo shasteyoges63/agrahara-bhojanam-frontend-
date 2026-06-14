@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Instagram, Facebook, Youtube, CheckCircle, Clock, MessageSquare, Send } from 'lucide-react';
 import { ContactMessage } from '../types';
 import PurchaseMapSection from './PurchaseMapSection';
+import { STORE_WHATSAPP_DISPLAY } from '../constants/contact';
 
 interface ContactPageProps {
   onContactSubmit: (message: Omit<ContactMessage, 'id' | 'date' | 'resolved'>) => void;
@@ -9,7 +10,7 @@ interface ContactPageProps {
 
 const CONTACT_CARDS = [
   { icon: Mail, title: 'Email Us', value: 'admin@agraharabhojanam.com', sub: 'We reply within 12 hours' },
-  { icon: Phone, title: 'Call / WhatsApp', value: '+91 90256 72285', sub: 'Mon–Sat, 9 AM – 7 PM' },
+  { icon: Phone, title: 'Call / WhatsApp', value: STORE_WHATSAPP_DISPLAY, sub: 'Mon–Sat, 9 AM – 7 PM' },
   { icon: MapPin, title: 'Visit Us', value: 'Madurai, Tamil Nadu 625001', sub: 'Agraharam heritage kitchen' },
   { icon: Clock, title: 'Business Hours', value: '9:00 AM – 7:00 PM', sub: 'Sunday by appointment' },
 ];

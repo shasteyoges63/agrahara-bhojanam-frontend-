@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --strictPort",
+    "dev": "node scripts/free-port.mjs && vite --strictPort",
     "build": "vite build",
     "preview": "vite preview --port 5001 --strictPort",
     "lint": "tsc --noEmit"

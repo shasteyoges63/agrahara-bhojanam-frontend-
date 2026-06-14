@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Instagram, Facebook, Youtube } from 'lucide-react';
+import { STORE_WHATSAPP_DISPLAY } from '../constants/contact';
 
 interface TradFooterProps {
   onChangeTab: (tab: string) => void;
@@ -82,7 +83,7 @@ export default function TradFooter({ onChangeTab }: TradFooterProps) {
                 </li>
                 <li className="flex gap-2.5 ab-footer-link items-center">
                   <Phone size={16} className="shrink-0 text-[#d4a017]" />
-                  <span>+91 90256 72285</span>
+                  <span>{STORE_WHATSAPP_DISPLAY}</span>
                 </li>
                 <li className="flex gap-2.5 ab-footer-link items-center">
                   <Mail size={16} className="shrink-0 text-[#d4a017]" />

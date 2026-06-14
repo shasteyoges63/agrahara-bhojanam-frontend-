@@ -144,7 +144,9 @@ export default function App() {
   const goToShop = (category: string) => {
     setShopCategory(category);
     clearSelectedProduct();
+    setActiveOrder(null);
     setCurrentTab('products');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectProduct = (product: Product | null) => {
@@ -258,7 +260,7 @@ export default function App() {
       paymentStatus: form.paymentMethod === 'UPI' ? 'Completed' : 'Pending',
       invoiceNumber: 'INV-' + new Date().getFullYear() + '-' + Math.floor(100 + Math.random() * 900),
       whatsappSent: false,
-      emailSent: true,
+      emailSent: false,
       notes: form.notes,
       items: cart.map(item => ({
         productId: item.product.id,
@@ -269,11 +271,11 @@ export default function App() {
       }))
     };
 
-    await api.createOrder(newOrder);
+    const savedOrder = await api.createOrder(newOrder);
     const updatedProducts = await api.getProducts();
     setProducts(normalizeProductImages(updatedProducts));
     setCart([]);
-    return newOrder;
+    return savedOrder;
   };
 
   return (

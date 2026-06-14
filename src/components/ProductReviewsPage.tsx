@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Star, ShoppingBag, MessageCircle, ZoomIn, Minus, Plus } from 'lucide-react';
 import { Product } from '../types';
 import { TESTIMONIALS, categoryImageFor } from '../data/siteContent';
+import { STORE_WHATSAPP_NUMBER } from '../constants/contact';
 
 export interface ProductReview {
   id: string;
@@ -104,7 +105,7 @@ export default function ProductReviewsPage({ product, onBack, onAddToCart, onPre
     setSubmitted(true);
   };
 
-  const whatsappUrl = `https://wa.me/919025672285?text=${encodeURIComponent(`Enquiry about ${product.name}`)}`;
+  const whatsappUrl = `https://wa.me/${STORE_WHATSAPP_NUMBER}?text=${encodeURIComponent(`Enquiry about ${product.name}`)}`;
   const reviewCount = reviews.length;
   const productImage = product.images?.[0] || categoryImageFor(product.category);
   const productPrice = Number(product.price);

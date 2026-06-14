@@ -3,7 +3,9 @@ import { ShoppingBag, X, MessageCircle } from 'lucide-react';
 import { CartItem } from '../types';
 import CartLineItem, { formatInr } from './CartLineItem';
 
-const WHATSAPP_URL = 'https://wa.me/919025672285';
+import { STORE_WHATSAPP_URL } from '../constants/contact';
+
+const WHATSAPP_URL = STORE_WHATSAPP_URL;
 
 interface CartDrawerProps {
   open: boolean;
