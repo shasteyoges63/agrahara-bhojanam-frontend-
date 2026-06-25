@@ -5,27 +5,31 @@
   --font-serif: "Merriweather", Georgia, serif;
   --font-sans: "Poppins", system-ui, sans-serif;
 
-  --color-ab-maroon: #4a1e1e;
-  --color-ab-maroon-dark: #3a1515;
-  --color-ab-maroon-light: #5c2828;
-  --color-ab-gold: #d4a017;
-  --color-ab-gold-light: #e8d48b;
-  --color-ab-gold-pale: #f5e6b8;
-  --color-ab-orange: #b45309;
-  --color-ab-orange-dark: #92400e;
-  --color-ab-orange-light: #fff8f0;
+  --color-ab-maroon: #6b1730;
+  --color-ab-maroon-dark: #3b0c16;
+  --color-ab-maroon-light: #8b2848;
+  --color-ab-gold: #b8892c;
+  --color-ab-gold-light: #d8bd78;
+  --color-ab-gold-pale: #efe0bd;
+  --color-ab-orange: #a45f1f;
+  --color-ab-orange-dark: #7e4213;
+  --color-ab-orange-light: #fff4da;
   --color-ab-green: #1b4332;
   --color-ab-green-dark: #0f2e22;
   --color-ab-red: #9b1c1c;
-  --color-ab-cream: #fffbf5;
-  --color-ab-ivory: #fffbf5;
-  --color-ab-warm: #faf6f1;
-  --color-ab-text: #2c1810;
-  --color-ab-muted: #6b5b4f;
+  --color-ab-cream: #f7e8c7;
+  --color-ab-ivory: #fff7df;
+  --color-ab-warm: #f2dcae;
+  --color-ab-text: #2b130d;
+  --color-ab-muted: #6e4b35;
 }
 
 body {
-  background-color: var(--color-ab-cream);
+  background-color: #fdf4e3;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(184, 137, 44, 0.16), transparent 24rem),
+    radial-gradient(circle at 86% 20%, rgba(107, 23, 48, 0.08), transparent 22rem),
+    linear-gradient(180deg, #fff7df 0%, #f7e8c7 48%, #f1d9a7 100%);
   color: var(--color-ab-text);
   font-family: var(--font-sans);
   overflow-x: hidden;
@@ -1936,23 +1940,24 @@ html.ab-theme-dark .ab-hero-carousel-shade {
 .ab-category-grid-card {
   border-radius: 1.25rem;
   overflow: hidden;
-  background: #ffffff;
-  border: 1px solid rgba(212, 160, 23, 0.18);
-  box-shadow: 0 4px 20px rgba(74, 30, 30, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.3s ease;
   text-align: left;
 }
 
 .ab-category-grid-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 36px rgba(74, 30, 30, 0.12);
-  border-color: rgba(212, 160, 23, 0.4);
+  transform: translateY(-2px);
+  box-shadow: none;
+  border: none;
 }
 
 .ab-category-grid-img-wrap {
   position: relative;
   height: 9.5rem;
   overflow: hidden;
+  border-radius: 1.25rem 1.25rem 0 0;
 }
 
 .ab-category-grid-img-wrap img {
@@ -1963,19 +1968,16 @@ html.ab-theme-dark .ab-hero-carousel-shade {
 }
 
 .ab-category-grid-card:hover .ab-category-grid-img-wrap img {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 .ab-category-grid-img-wrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(58, 21, 21, 0.55) 0%, transparent 50%);
+  display: none;
 }
 
 .ab-category-grid-footer {
-  padding: 0.85rem 1rem 1rem;
-  background: #ffffff;
+  padding: 0.85rem 0 1rem;
+  background: transparent;
 }
 
 .ab-category-grid-title {
@@ -2308,16 +2310,14 @@ html.ab-theme-dark .ab-hero-carousel-shade {
 
 /* Royal product card */
 .ab-product-card {
-  background: #ffffff;
-  border: 1px solid rgba(201, 162, 39, 0.18);
+  background: transparent;
+  border: none;
   border-radius: 1rem;
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease;
 }
 .ab-product-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(201, 162, 39, 0.45);
-  box-shadow: 0 12px 32px rgba(92, 26, 27, 0.12);
+  transform: translateY(-2px);
 }
 
 /* Category banner cards */
@@ -2347,9 +2347,9 @@ html.ab-theme-dark .ab-hero-carousel-shade {
 }
 
 .ab-trust-strip {
-  background: linear-gradient(90deg, var(--color-ab-maroon-dark) 0%, var(--color-ab-maroon) 50%, var(--color-ab-maroon-dark) 100%);
-  border-top: 2px solid var(--color-ab-gold);
-  border-bottom: 2px solid var(--color-ab-gold);
+  background: transparent;
+  border-top: none;
+  border-bottom: none;
 }
 
 .ab-page-shell {
@@ -3890,4 +3890,1218 @@ html.ab-theme-dark .ab-testimonial-card.ab-touch-active .ab-testimonial-name {
 
 .ab-cart-modal-whatsapp:hover {
   transform: scale(1.06);
+}
+
+/* Reference palette pass — parchment, temple maroon, antique gold */
+html.ab-theme-light .ab-app-shell,
+.ab-app-shell {
+  background:
+    radial-gradient(circle at top left, rgba(184, 137, 44, 0.15), transparent 24rem),
+    radial-gradient(circle at bottom right, rgba(107, 23, 48, 0.08), transparent 28rem),
+    linear-gradient(180deg, #fff7df 0%, #f7e8c7 52%, #f0d39a 100%) !important;
+  color: #2b130d;
+}
+
+.ab-site-header {
+  background: rgba(255, 247, 223, 0.96);
+  border-bottom: 1px solid rgba(107, 23, 48, 0.18);
+  box-shadow: 0 8px 24px rgba(65, 27, 13, 0.08);
+}
+
+.ab-header-brand-title,
+.ab-header-nav-active,
+.ab-header-icon,
+.ab-header-link,
+.ab-header-mobile-link {
+  color: #5a1024;
+}
+
+.ab-header-brand-sub,
+.ab-header-nav:hover,
+.ab-header-icon:hover,
+.ab-header-link:hover {
+  color: #a97b24;
+}
+
+.ab-header-nav {
+  color: #3e2418;
+}
+
+.ab-header-nav-active {
+  border-bottom-color: #b8892c;
+}
+
+.ab-header-dropdown,
+.ab-site-mobile-menu {
+  background: #fff7df;
+  border-color: rgba(184, 137, 44, 0.35);
+}
+
+.ab-header-dropdown-item:hover {
+  background: #f2dcae;
+  color: #5a1024;
+}
+
+.ab-section-surface,
+.ab-section-band,
+.ab-section-band-alt,
+.ab-royal-categories-section,
+.ab-cart-page,
+.ab-contact-body,
+.ab-about-body,
+.ab-store-section--cream,
+.ab-store-section--warm,
+.ab-store-section--white {
+  background:
+    linear-gradient(180deg, rgba(255, 247, 223, 0.94), rgba(247, 232, 199, 0.94)) !important;
+}
+
+.ab-card,
+.ab-section-panel,
+.ab-product-card,
+.ab-category-grid-card,
+.ab-royal-card,
+.ab-contact-card,
+.ab-about-story-card,
+.ab-store-card,
+.ab-store-stat,
+.ab-store-value-card,
+.ab-cart-modal,
+.ab-cart-item {
+  background: #fff7df;
+  border-color: rgba(184, 137, 44, 0.34);
+  box-shadow: 0 10px 28px rgba(65, 27, 13, 0.09);
+}
+
+.ab-product-img-wrap,
+.ab-category-grid-footer,
+.ab-cart-modal-body,
+.ab-cart-item-img {
+  background: #f6e6c2 !important;
+}
+
+.ab-product-card:hover,
+.ab-category-grid-card:hover,
+.ab-royal-card:hover,
+.ab-contact-card:hover,
+.ab-store-card:hover {
+  border-color: rgba(184, 137, 44, 0.62);
+  box-shadow: 0 16px 40px rgba(65, 27, 13, 0.14);
+}
+
+.ab-btn-primary,
+.ab-footer-subscribe-btn,
+.ab-featured-shop-btn,
+.ab-cart-modal-btn--primary,
+.ab-contact-submit-btn {
+  background: linear-gradient(135deg, #7a1634 0%, #5a1024 100%) !important;
+  color: #fff1c9 !important;
+  border-color: rgba(184, 137, 44, 0.55) !important;
+}
+
+.ab-btn-primary:hover,
+.ab-footer-subscribe-btn:hover,
+.ab-featured-shop-btn:hover,
+.ab-cart-modal-btn--primary:hover,
+.ab-contact-submit-btn:hover {
+  background: linear-gradient(135deg, #5a1024 0%, #3b0c16 100%) !important;
+  color: #fff7df !important;
+}
+
+.ab-btn-outline,
+.ab-cart-modal-btn--outline {
+  border-color: #6b1730 !important;
+  color: #6b1730 !important;
+  background: rgba(255, 247, 223, 0.72) !important;
+}
+
+.ab-btn-outline:hover,
+.ab-cart-modal-btn--outline:hover {
+  background: #6b1730 !important;
+  color: #fff1c9 !important;
+}
+
+.ab-royal-badge,
+.ab-store-badge,
+.ab-page-hero-badge {
+  color: #8d641a;
+  border-color: rgba(184, 137, 44, 0.58);
+  background: rgba(184, 137, 44, 0.12);
+}
+
+.ab-page-h2,
+.ab-section-heading h1,
+.ab-section-heading h2,
+.ab-section-heading h3,
+.ab-store-title,
+.ab-product-title,
+.ab-category-grid-title,
+.ab-cart-modal-header-title h2 {
+  color: #5a1024 !important;
+}
+
+.ab-p,
+.ab-page-body,
+.ab-store-subtitle,
+.ab-about-story-text,
+.ab-cart-item-title {
+  color: #3e2418;
+}
+
+.ab-muted,
+.ab-page-muted,
+.ab-store-value-card p,
+.ab-cart-item-meta,
+.ab-cart-modal-note {
+  color: #6e4b35;
+}
+
+.ab-trust-strip,
+.ab-footer-newsletter,
+.ab-footer-main,
+.ab-page-hero,
+.ab-contact-hero,
+.ab-store-section--maroon {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(184, 137, 44, 0.18), transparent 20rem),
+    linear-gradient(135deg, #3b0c16 0%, #6b1730 52%, #4a0d1d 100%) !important;
+  border-color: #b8892c;
+}
+
+.ab-footer-newsletter-title,
+.ab-footer-heading,
+.ab-footer-brand-name,
+.ab-footer-logo-ring,
+.ab-footer-social,
+.ab-featured-collection-label,
+.ab-featured-collection-title,
+.ab-hero-carousel-highlight,
+.ab-cart-item-total {
+  color: #d8bd78 !important;
+}
+
+.ab-footer-link,
+.ab-footer-desc {
+  color: rgba(239, 224, 189, 0.86);
+}
+
+.ab-footer-email-input {
+  background: rgba(43, 19, 13, 0.38);
+  border-color: rgba(216, 189, 120, 0.55);
+  color: #fff7df;
+}
+
+.ab-logo-emblem {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  color: #6b1730;
+  background:
+    radial-gradient(circle at center, #fff7df 0 42%, #f2dcae 43% 56%, #fff7df 57% 100%);
+  border: 2px solid #b8892c;
+  box-shadow:
+    inset 0 0 0 3px rgba(107, 23, 48, 0.16),
+    0 4px 14px rgba(43, 19, 13, 0.16);
+}
+
+.ab-logo-emblem::before,
+.ab-logo-emblem::after {
+  content: '';
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.ab-logo-emblem::before {
+  inset: -5px;
+  border: 1px solid rgba(184, 137, 44, 0.7);
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(107, 23, 48, 0.2) 0deg 8deg,
+      transparent 8deg 16deg
+    );
+  mask: radial-gradient(circle, transparent 68%, #000 69%);
+  -webkit-mask: radial-gradient(circle, transparent 68%, #000 69%);
+}
+
+.ab-logo-emblem::after {
+  inset: 7px;
+  border: 1px dashed rgba(107, 23, 48, 0.38);
+}
+
+.ab-logo-emblem--header {
+  width: 3.2rem;
+}
+
+.ab-logo-emblem--footer {
+  width: 4.35rem;
+}
+
+.ab-logo-script {
+  position: relative;
+  z-index: 1;
+  margin-bottom: -0.08rem;
+  font-family: var(--font-serif);
+  font-size: 0.46rem;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1;
+  color: #8b2848;
+}
+
+.ab-logo-main {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.ab-logo-emblem--footer .ab-logo-script {
+  font-size: 0.58rem;
+}
+
+.ab-logo-emblem--footer .ab-logo-main {
+  font-size: 1.2rem;
+}
+
+.ab-logo-image-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: transparent !important;
+  border: none;
+  box-shadow: none;
+  isolation: isolate;
+}
+
+.ab-logo-image-wrap--header {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+@media (min-width: 768px) {
+  .ab-logo-image-wrap--header {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.ab-logo-image-wrap--footer {
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+.ab-logo-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  background: transparent;
+  filter: drop-shadow(0 2px 6px rgba(43, 19, 13, 0.12));
+}
+
+.ab-footer-brand-tag {
+  margin-top: 0.22rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(216, 189, 120, 0.76);
+}
+
+.ab-footer-main {
+  position: relative;
+  overflow: hidden;
+}
+
+.ab-footer-main::before,
+.ab-footer-main::after {
+  content: '';
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(216, 189, 120, 0.72), transparent);
+}
+
+.ab-footer-main::before {
+  top: 1.15rem;
+}
+
+.ab-footer-main::after {
+  bottom: 4.35rem;
+}
+
+.ab-footer-brand-block {
+  position: relative;
+}
+
+.ab-footer-brand-block::after {
+  content: 'Pure Traditional Homemade';
+  display: inline-flex;
+  margin-top: 0.35rem;
+  padding: 0.32rem 0.8rem;
+  border: 1px solid rgba(216, 189, 120, 0.42);
+  border-radius: 9999px;
+  color: #d8bd78;
+  background: rgba(255, 247, 223, 0.06);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Final reference-image palette override */
+:root {
+  --ab-ref-ivory: #fff4d7;
+  --ab-ref-cream: #f4dfb3;
+  --ab-ref-warm: #efd39e;
+  --ab-ref-maroon: #7b1434;
+  --ab-ref-maroon-deep: #4f0d1f;
+  --ab-ref-maroon-soft: #9b2a4b;
+  --ab-ref-gold: #c79b3a;
+  --ab-ref-gold-light: #dec17a;
+  --ab-ref-text: #2f160d;
+  --ab-ref-muted: #6d4b32;
+}
+
+body,
+html.ab-theme-light body,
+html.ab-theme-light .ab-app-shell,
+.ab-app-shell {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(199, 155, 58, 0.16), transparent 24rem),
+    radial-gradient(circle at 86% 20%, rgba(123, 20, 52, 0.08), transparent 22rem),
+    linear-gradient(180deg, var(--ab-ref-ivory) 0%, var(--ab-ref-cream) 50%, #eecf91 100%) !important;
+  color: var(--ab-ref-text) !important;
+}
+
+.ab-site-header {
+  background: rgba(255, 244, 215, 0.96) !important;
+  border-bottom: 1px solid rgba(123, 20, 52, 0.2) !important;
+  box-shadow: 0 8px 24px rgba(47, 22, 13, 0.08) !important;
+}
+
+.ab-header-brand-title,
+.ab-header-nav-active,
+.ab-header-icon,
+.ab-header-link,
+.ab-header-mobile-link,
+.ab-page-h2,
+.ab-section-heading h1,
+.ab-section-heading h2,
+.ab-section-heading h3,
+.ab-store-title,
+.ab-product-title,
+.ab-category-grid-title,
+.ab-cart-modal-header-title h2 {
+  color: var(--ab-ref-maroon) !important;
+}
+
+.ab-header-nav,
+.ab-p,
+.ab-page-body,
+.ab-store-subtitle,
+.ab-about-story-text,
+.ab-cart-item-title {
+  color: #3f2417 !important;
+}
+
+.ab-header-brand-sub,
+.ab-header-nav:hover,
+.ab-header-icon:hover,
+.ab-header-link:hover,
+.ab-royal-badge,
+.ab-store-badge,
+.ab-page-hero-badge,
+.ab-featured-collection-label,
+.ab-cart-item-total {
+  color: #8a6119 !important;
+}
+
+.ab-header-nav-active {
+  border-bottom-color: var(--ab-ref-gold) !important;
+}
+
+.ab-header-dropdown,
+.ab-site-mobile-menu {
+  background: var(--ab-ref-ivory) !important;
+  border-color: rgba(199, 155, 58, 0.36) !important;
+}
+
+.ab-header-dropdown-item:hover {
+  background: var(--ab-ref-warm) !important;
+  color: var(--ab-ref-maroon) !important;
+}
+
+.ab-section-surface,
+.ab-section-band,
+.ab-section-band-alt,
+.ab-royal-categories-section,
+.ab-cart-page,
+.ab-contact-body,
+.ab-about-body,
+.ab-store-section--cream,
+.ab-store-section--warm,
+.ab-store-section--white,
+main .bg-white,
+main .bg-\[\#fffbf5\],
+main .bg-\[\#fff8f0\],
+main .bg-\[\#fdf6ec\] {
+  background:
+    linear-gradient(180deg, rgba(255, 244, 215, 0.96), rgba(244, 223, 179, 0.96)) !important;
+}
+
+.ab-card,
+.ab-section-panel,
+.ab-product-card,
+.ab-category-grid-card,
+.ab-royal-card,
+.ab-contact-card,
+.ab-about-story-card,
+.ab-store-card,
+.ab-store-stat,
+.ab-store-value-card,
+.ab-cart-modal,
+.ab-cart-item {
+  background: var(--ab-ref-ivory) !important;
+  border-color: rgba(199, 155, 58, 0.36) !important;
+  box-shadow: 0 10px 28px rgba(47, 22, 13, 0.09) !important;
+}
+
+.ab-product-img-wrap,
+.ab-category-grid-footer,
+.ab-cart-modal-body,
+.ab-cart-modal-header,
+.ab-cart-modal-footer,
+.ab-cart-item-img {
+  background: #f1dcae !important;
+}
+
+.ab-btn-primary,
+.ab-footer-subscribe-btn,
+.ab-featured-shop-btn,
+.ab-cart-modal-btn--primary,
+.ab-contact-submit-btn {
+  background: linear-gradient(135deg, #8a1738 0%, var(--ab-ref-maroon) 100%) !important;
+  color: #fff2d4 !important;
+  border-color: rgba(199, 155, 58, 0.58) !important;
+}
+
+.ab-btn-primary:hover,
+.ab-footer-subscribe-btn:hover,
+.ab-featured-shop-btn:hover,
+.ab-cart-modal-btn--primary:hover,
+.ab-contact-submit-btn:hover {
+  background: linear-gradient(135deg, var(--ab-ref-maroon) 0%, var(--ab-ref-maroon-deep) 100%) !important;
+  color: var(--ab-ref-ivory) !important;
+}
+
+.ab-btn-outline,
+.ab-cart-modal-btn--outline {
+  border-color: var(--ab-ref-maroon) !important;
+  color: var(--ab-ref-maroon) !important;
+  background: rgba(255, 244, 215, 0.72) !important;
+}
+
+.ab-btn-outline:hover,
+.ab-cart-modal-btn--outline:hover {
+  background: var(--ab-ref-maroon) !important;
+  color: #fff2d4 !important;
+}
+
+.ab-royal-badge,
+.ab-store-badge,
+.ab-page-hero-badge {
+  border-color: rgba(199, 155, 58, 0.58) !important;
+  background: rgba(199, 155, 58, 0.12) !important;
+}
+
+.ab-muted,
+.ab-page-muted,
+.ab-store-value-card p,
+.ab-cart-item-meta,
+.ab-cart-modal-note,
+main .text-\[\#6b5b4f\],
+main .text-\[\#8a7568\] {
+  color: var(--ab-ref-muted) !important;
+}
+
+.ab-trust-strip,
+.ab-footer-newsletter,
+.ab-footer-main,
+.ab-page-hero,
+.ab-contact-hero,
+.ab-store-section--maroon {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(199, 155, 58, 0.18), transparent 20rem),
+    linear-gradient(135deg, var(--ab-ref-maroon-deep) 0%, var(--ab-ref-maroon) 52%, #5d1028 100%) !important;
+  border-color: var(--ab-ref-gold) !important;
+}
+
+.ab-footer-newsletter-title,
+.ab-footer-heading,
+.ab-footer-brand-name,
+.ab-footer-social,
+.ab-hero-carousel-highlight,
+.ab-footer-brand-block::after {
+  color: var(--ab-ref-gold-light) !important;
+}
+
+.ab-footer-link,
+.ab-footer-desc {
+  color: rgba(242, 225, 183, 0.86) !important;
+}
+
+.ab-footer-email-input {
+  background: rgba(47, 22, 13, 0.38) !important;
+  border-color: rgba(222, 193, 122, 0.55) !important;
+  color: var(--ab-ref-ivory) !important;
+}
+
+.ab-hero-carousel-badge {
+  color: #fff2d4 !important;
+  background: rgba(123, 20, 52, 0.76) !important;
+  border-color: rgba(199, 155, 58, 0.55) !important;
+}
+
+.ab-hero-carousel-badge--gold {
+  color: var(--ab-ref-maroon-deep) !important;
+  background: rgba(199, 155, 58, 0.92) !important;
+}
+
+.ab-store-section--maroon .ab-store-heading--on-dark .ab-store-title,
+.ab-trust-strip .ab-store-heading--on-dark .ab-store-title,
+.ab-page-hero .ab-store-heading--on-dark .ab-store-title,
+.ab-contact-hero .ab-store-heading--on-dark .ab-store-title {
+  color: #fff4d7 !important;
+  text-shadow: 0 2px 14px rgba(47, 22, 13, 0.35);
+}
+
+.ab-store-section--maroon .ab-store-heading--on-dark .ab-store-subtitle,
+.ab-trust-strip .ab-store-heading--on-dark .ab-store-subtitle,
+.ab-page-hero .ab-store-heading--on-dark .ab-store-subtitle,
+.ab-contact-hero .ab-store-heading--on-dark .ab-store-subtitle {
+  color: rgba(255, 244, 215, 0.86) !important;
+}
+
+.ab-store-section--maroon .ab-store-heading--on-dark .ab-store-badge,
+.ab-trust-strip .ab-store-heading--on-dark .ab-store-badge,
+.ab-page-hero .ab-store-heading--on-dark .ab-store-badge,
+.ab-contact-hero .ab-store-heading--on-dark .ab-store-badge {
+  color: #dec17a !important;
+  border-color: rgba(222, 193, 122, 0.5) !important;
+  background: rgba(222, 193, 122, 0.1) !important;
+}
+
+/* Reference navbar: warm parchment with dark brown text */
+.ab-site-header {
+  background:
+    linear-gradient(180deg, rgba(255, 244, 215, 0.98) 0%, rgba(251, 232, 190, 0.94) 100%) !important;
+  border-bottom: 1px solid rgba(151, 104, 35, 0.28) !important;
+  box-shadow: 0 4px 18px rgba(75, 38, 17, 0.08) !important;
+  backdrop-filter: blur(10px);
+}
+
+.ab-header-brand-title {
+  color: #6f1730 !important;
+}
+
+.ab-header-brand-sub {
+  color: #9a6a22 !important;
+}
+
+.ab-header-nav,
+.ab-header-link,
+.ab-header-icon,
+.ab-header-mobile-link,
+.ab-header-mobile-muted {
+  color: #3b2415 !important;
+}
+
+.ab-header-nav:hover,
+.ab-header-link:hover,
+.ab-header-icon:hover,
+.ab-header-nav-active {
+  color: #7b1434 !important;
+}
+
+.ab-header-nav-active {
+  border-bottom-color: #b8892c !important;
+}
+
+.ab-header-dropdown,
+.ab-site-mobile-menu {
+  background: #fff4d7 !important;
+  border: 1px solid rgba(184, 137, 44, 0.36) !important;
+  box-shadow: 0 16px 40px rgba(75, 38, 17, 0.14) !important;
+}
+
+.ab-header-dropdown-item {
+  color: #3b2415 !important;
+}
+
+.ab-header-dropdown-item:hover {
+  background: #f3dca8 !important;
+  color: #7b1434 !important;
+}
+
+.ab-site-header .bg-\[\#c9a227\] {
+  background-color: #b8892c !important;
+}
+
+.ab-site-header .text-\[\#3d1011\] {
+  color: #4f0d1f !important;
+}
+
+.ab-page-hero,
+.ab-contact-hero {
+  padding-top: calc(3.5rem + 4.1rem) !important;
+}
+
+/* Remove white blocks from home sections */
+.ab-home-page .ab-section-surface,
+.ab-home-page .ab-section-band,
+.ab-home-page .ab-section-band-alt,
+.ab-home-page .ab-royal-categories-section {
+  background: transparent !important;
+}
+
+.ab-home-page .ab-category-grid-card,
+.ab-home-page .ab-product-card,
+.ab-home-page .ab-step-card,
+.ab-home-page .ab-how-step-card,
+.ab-home-page .ab-testimonial-card {
+  background: rgba(255, 244, 215, 0.28) !important;
+  border-color: rgba(199, 155, 58, 0.22) !important;
+  box-shadow: none !important;
+}
+
+.ab-home-page .ab-category-grid-footer,
+.ab-home-page .ab-product-img-wrap,
+.ab-home-page .ab-cart-modal-body,
+.ab-home-page .bg-white,
+.ab-home-page .bg-\[\#fff8f0\],
+.ab-home-page .bg-\[\#fffbf5\],
+.ab-home-page .bg-\[\#fdf6ec\] {
+  background: transparent !important;
+}
+
+.ab-home-page .ab-product-card:hover,
+.ab-home-page .ab-category-grid-card:hover,
+.ab-home-page .ab-step-card:hover,
+.ab-home-page .ab-how-step-card:hover,
+.ab-home-page .ab-testimonial-card:hover,
+.ab-home-page .ab-testimonial-card.ab-touch-active {
+  background: rgba(255, 244, 215, 0.42) !important;
+  border-color: rgba(199, 155, 58, 0.34) !important;
+  box-shadow: none !important;
+}
+
+.ab-home-page .ab-how-gallery-frame {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.ab-home-page .ab-product-card .border-t {
+  border-color: rgba(199, 155, 58, 0.18) !important;
+}
+
+.ab-home-page .ab-product-card button.bg-white {
+  background: rgba(255, 244, 215, 0.65) !important;
+}
+
+/* Remove white blocks from About sections */
+.ab-about-page .ab-about-body,
+.ab-about-page .ab-section-surface,
+.ab-about-page .ab-section-band,
+.ab-about-page .ab-section-band-alt {
+  background: transparent !important;
+}
+
+.ab-about-page .ab-royal-card,
+.ab-about-page .ab-testimonial-card,
+.ab-about-page .ab-about-story-card {
+  background: rgba(255, 244, 215, 0.28) !important;
+  border-color: rgba(199, 155, 58, 0.22) !important;
+  box-shadow: none !important;
+}
+
+.ab-about-page .ab-royal-card:hover,
+.ab-about-page .ab-testimonial-card:hover,
+.ab-about-page .ab-testimonial-card.ab-touch-active,
+.ab-about-page .ab-about-story-card:hover {
+  background: rgba(255, 244, 215, 0.42) !important;
+  border-color: rgba(199, 155, 58, 0.34) !important;
+  box-shadow: none !important;
+}
+
+.ab-about-page .bg-white,
+.ab-about-page .bg-\[\#fff8f0\],
+.ab-about-page .bg-\[\#fffbf5\],
+.ab-about-page .bg-\[\#fdf6ec\] {
+  background: transparent !important;
+}
+
+/* About stat cards: match contact-card style from reference */
+.ab-about-page .ab-about-cards-overlap .ab-royal-card {
+  background: #fff4d7 !important;
+  border: 1px solid rgba(199, 155, 58, 0.34) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 12px 28px rgba(75, 38, 17, 0.12) !important;
+}
+
+.ab-about-page .ab-about-cards-overlap .ab-royal-card:hover {
+  background: #fff4d7 !important;
+  border-color: rgba(199, 155, 58, 0.48) !important;
+  box-shadow: 0 16px 34px rgba(75, 38, 17, 0.16) !important;
+}
+
+.ab-about-page .ab-about-cards-overlap .ab-royal-card-icon {
+  background: #6f1730 !important;
+  color: #c79b3a !important;
+  border-color: rgba(199, 155, 58, 0.42) !important;
+  box-shadow: 0 8px 18px rgba(75, 18, 36, 0.24) !important;
+}
+
+.ab-about-page .ab-about-promise-band .ab-royal-card {
+  background: rgba(255, 244, 215, 0.18) !important;
+  border-color: transparent !important;
+  border-width: 0 !important;
+}
+
+.ab-about-page .ab-about-promise-band .ab-royal-card-label {
+  color: #dec17a !important;
+}
+
+.ab-about-page .ab-about-promise-band .ab-royal-card-value {
+  color: #fff4d7 !important;
+  text-shadow: 0 1px 8px rgba(47, 22, 13, 0.35);
+}
+
+.ab-about-page .ab-about-promise-band .ab-royal-card-sub {
+  color: rgba(255, 244, 215, 0.86) !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   Parchment background — corner flower design always visible
+   ══════════════════════════════════════════════════════════ */
+html.ab-theme-light {
+  --ab-parchment-url: url('./assets/parchment-background.png');
+  --ab-parchment-fallback: #fdf4e3;
+  --ab-maroon-band: #600d1e;
+  --ab-maroon-band-dark: #5a0a1a;
+}
+
+html.ab-theme-light body {
+  position: relative;
+  background-color: var(--ab-parchment-fallback) !important;
+  background-image: none !important;
+}
+
+/* Fixed layer: full frame + bottom lotus flowers stay on screen */
+html.ab-theme-light body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--ab-parchment-url);
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+html.ab-theme-light #root {
+  position: relative;
+  z-index: 1;
+}
+
+html.ab-theme-light .ab-app-shell,
+html.ab-theme-light body.ab-app-shell {
+  background: transparent !important;
+}
+
+html.ab-theme-light .ab-app-shell > .relative {
+  background: transparent;
+}
+
+html.ab-theme-light .ab-home-page,
+html.ab-theme-light .ab-about-page,
+html.ab-theme-light .ab-store-page,
+html.ab-theme-light .ab-contact-page,
+html.ab-theme-light main {
+  background: transparent !important;
+}
+
+html.ab-theme-light .ab-section-surface,
+html.ab-theme-light .ab-section-band,
+html.ab-theme-light .ab-section-band-alt,
+html.ab-theme-light .ab-royal-categories-section,
+html.ab-theme-light .ab-cart-page,
+html.ab-theme-light .ab-contact-body,
+html.ab-theme-light .ab-about-body,
+html.ab-theme-light .ab-store-section,
+html.ab-theme-light .ab-store-section--cream,
+html.ab-theme-light .ab-store-section--warm,
+html.ab-theme-light .ab-store-section--white,
+html.ab-theme-light main .bg-white,
+html.ab-theme-light main .bg-\[\#fffbf5\],
+html.ab-theme-light main .bg-\[\#fff8f0\],
+html.ab-theme-light main .bg-\[\#fdf6ec\] {
+  background: transparent !important;
+}
+
+html.ab-theme-light .ab-site-header {
+  background-color: var(--ab-parchment-fallback) !important;
+  background-image: var(--ab-parchment-url) !important;
+  background-size: 100% 100% !important;
+  background-position: center top !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  backdrop-filter: none !important;
+  border-bottom: 1px solid rgba(151, 104, 35, 0.28) !important;
+  box-shadow: 0 2px 14px rgba(75, 38, 17, 0.07) !important;
+}
+
+html.ab-theme-light .ab-site-mobile-menu {
+  background-color: var(--ab-parchment-fallback) !important;
+  background-image: var(--ab-parchment-url) !important;
+  background-size: 100% 100% !important;
+  background-position: center top !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  border-top: 1px solid rgba(151, 104, 35, 0.22) !important;
+}
+
+html.ab-theme-light .ab-header-dropdown {
+  background: rgba(253, 244, 227, 0.97) !important;
+  border-color: rgba(199, 155, 58, 0.35) !important;
+}
+
+/* Cream floral edge strips above/below maroon band */
+.ab-floral-edge-strip {
+  height: 1.35rem;
+  background-color: var(--ab-parchment-fallback);
+  background-image: var(--ab-parchment-url);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.ab-floral-edge-strip--top {
+  background-position: center top;
+}
+
+.ab-floral-edge-strip--bottom {
+  background-position: center bottom;
+}
+
+/* Trust strip — transparent on parchment, dark readable text */
+html.ab-theme-light .ab-trust-strip--light,
+html.ab-theme-light .ab-trust-strip.ab-trust-strip--light {
+  background: transparent !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+html.ab-theme-light .ab-trust-strip--light .ab-trust-strip-heading,
+html.ab-theme-light .ab-home-page .ab-trust-strip--light .ab-trust-strip-heading,
+html.ab-theme-light .ab-trust-strip--light .ab-trust-strip-title,
+html.ab-theme-light .ab-trust-strip--light h4 {
+  color: #600d1e !important;
+}
+
+html.ab-theme-light .ab-trust-strip--light .ab-trust-strip-desc,
+html.ab-theme-light .ab-trust-strip--light p {
+  color: #4a3728 !important;
+}
+
+html.ab-theme-light .ab-trust-strip-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9a6a22;
+  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid rgba(201, 162, 39, 0.4);
+}
+
+html.ab-theme-light .ab-trust-strip,
+html.ab-theme-light .ab-footer-newsletter,
+html.ab-theme-light .ab-footer-main,
+html.ab-theme-light .ab-page-hero,
+html.ab-theme-light .ab-contact-hero,
+html.ab-theme-light .ab-store-section--maroon {
+  border-color: transparent;
+}
+
+/* Cards: light cream glass so floral parchment shows through */
+html.ab-theme-light .ab-testimonial-card,
+html.ab-theme-light .ab-store-card,
+html.ab-theme-light .ab-step-card,
+html.ab-theme-light .ab-how-step-card {
+  background: rgba(253, 244, 227, 0.58) !important;
+  backdrop-filter: blur(1px);
+}
+
+html.ab-theme-light .ab-category-grid-footer {
+  background: rgba(253, 244, 227, 0.4) !important;
+}
+
+/* About — "The Agraharam Way" on parchment, dark readable text */
+html.ab-theme-light .ab-about-promise-band--light {
+  background: transparent !important;
+}
+
+html.ab-theme-light .ab-about-promise-band--light .ab-store-title {
+  color: #600d1e !important;
+}
+
+html.ab-theme-light .ab-about-promise-band--light .ab-store-subtitle {
+  color: #4a3728 !important;
+}
+
+html.ab-theme-light .ab-about-promise-band--light .ab-store-badge {
+  color: #8a6119 !important;
+  border-color: rgba(199, 155, 58, 0.45) !important;
+  background: rgba(201, 162, 39, 0.12) !important;
+}
+
+html.ab-theme-light .ab-about-promise-band--light .ab-royal-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.ab-theme-light .ab-about-promise-band--light .ab-royal-card-label {
+  color: #8a6119 !important;
+}
+
+html.ab-theme-light .ab-about-promise-band--light .ab-royal-card-value {
+  color: #600d1e !important;
+  text-shadow: none !important;
+}
+
+html.ab-theme-light .ab-about-promise-band--light .ab-royal-card-sub {
+  color: #4a3728 !important;
+}
+
+html.ab-theme-light .ab-about-promise-band--light .ab-royal-card-icon {
+  background: #6f1730 !important;
+  color: #c79b3a !important;
+  border-color: rgba(199, 155, 58, 0.42) !important;
+}
+
+/* Contact — readable text on parchment (cards styled at end of file) */
+html.ab-theme-light .ab-contact-page .ab-contact-body {
+  background: transparent !important;
+}
+
+/* Product cards — same background as page (no separate card panel) */
+html.ab-theme-light .ab-product-card,
+html.ab-theme-light .ab-home-page .ab-product-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html.ab-theme-light .ab-product-card:hover,
+html.ab-theme-light .ab-home-page .ab-product-card:hover {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.ab-theme-light .ab-product-img-wrap,
+html.ab-theme-light .ab-home-page .ab-product-img-wrap {
+  background: transparent !important;
+}
+
+/* Category cards — same background as page (no separate card panel) */
+html.ab-theme-light .ab-category-grid-card,
+html.ab-theme-light .ab-home-page .ab-category-grid-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html.ab-theme-light .ab-category-grid-card:hover,
+html.ab-theme-light .ab-home-page .ab-category-grid-card:hover {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+html.ab-theme-light .ab-category-grid-footer,
+html.ab-theme-light .ab-home-page .ab-category-grid-footer {
+  background: transparent !important;
+}
+
+html.ab-theme-light .ab-category-grid-img-wrap::after {
+  display: none !important;
+}
+
+html.ab-theme-light .ab-category-grid-title {
+  color: #600d1e !important;
+}
+
+/* About page — transparent cards on parchment, readable dark text */
+html.ab-theme-light .ab-about-page .ab-about-body,
+html.ab-theme-light .ab-about-page .ab-store-section,
+html.ab-theme-light .ab-about-page .ab-about-values-band,
+html.ab-theme-light .ab-about-page .ab-store-section--white {
+  background: transparent !important;
+}
+
+html.ab-theme-light .ab-about-page .ab-royal-card,
+html.ab-theme-light .ab-about-page .ab-about-story-card,
+html.ab-theme-light .ab-about-page .ab-about-cards-overlap .ab-royal-card,
+html.ab-theme-light .ab-about-page .ab-about-promise-band--light .ab-royal-card,
+html.ab-theme-light .ab-about-page .ab-about-values-band .ab-royal-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html.ab-theme-light .ab-about-page .ab-royal-card:hover,
+html.ab-theme-light .ab-about-page .ab-about-story-card:hover,
+html.ab-theme-light .ab-about-page .ab-about-cards-overlap .ab-royal-card:hover,
+html.ab-theme-light .ab-about-page .ab-about-promise-band--light .ab-royal-card:hover,
+html.ab-theme-light .ab-about-page .ab-about-values-band .ab-royal-card:hover {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: translateY(-2px);
+}
+
+html.ab-theme-light .ab-about-page .ab-royal-card-label,
+html.ab-theme-light .ab-about-page .ab-about-promise-band--light .ab-royal-card-label {
+  color: #8a6119 !important;
+}
+
+html.ab-theme-light .ab-about-page .ab-royal-card-value,
+html.ab-theme-light .ab-about-page .ab-about-cards-overlap .ab-royal-card-value,
+html.ab-theme-light .ab-about-page .ab-about-promise-band--light .ab-royal-card-value {
+  color: #600d1e !important;
+  text-shadow: none !important;
+}
+
+html.ab-theme-light .ab-about-page .ab-royal-card-sub,
+html.ab-theme-light .ab-about-page .ab-about-promise-band--light .ab-royal-card-sub {
+  color: #4a3728 !important;
+}
+
+html.ab-theme-light .ab-about-page .ab-about-story-card {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+html.ab-theme-light .ab-about-page .ab-store-title,
+html.ab-theme-light .ab-about-page .ab-about-story-card .ab-store-title {
+  color: #600d1e !important;
+}
+
+html.ab-theme-light .ab-about-page .ab-store-subtitle,
+html.ab-theme-light .ab-about-page .ab-about-story-text {
+  color: #4a3728 !important;
+}
+
+html.ab-theme-light .ab-about-page .ab-testimonial-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Contact page — transparent cards on parchment, readable dark text */
+html.ab-theme-light .ab-contact-page .ab-contact-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-card:hover {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: translateY(-2px);
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-card-label {
+  color: #8a6119 !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-card-value {
+  color: #600d1e !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-card-sub {
+  color: #4a3728 !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-form-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-form-aside {
+  background: transparent !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-aside-title {
+  color: #600d1e !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-aside-desc,
+html.ab-theme-light .ab-contact-page .ab-contact-aside-quote,
+html.ab-theme-light .ab-contact-page .ab-contact-aside-social-label {
+  color: #4a3728 !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-form-panel {
+  background: transparent !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-form-label {
+  color: #600d1e !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-success h3 {
+  color: #600d1e !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-success p {
+  color: #4a3728 !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-map-section .ab-page-h2 {
+  color: #600d1e !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-map-section .ab-page-body {
+  color: #4a3728 !important;
+}
+
+html.ab-theme-light .ab-contact-page .ab-contact-map-frame {
+  border: none !important;
+  box-shadow: none !important;
 }

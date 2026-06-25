@@ -72,20 +72,20 @@ export default function HomePage({ products, onChangeTab, onShopCategory, onSele
         subtitle="Five authentic collections from our Madurai kitchen"
       />
 
-      {/* Trust strip */}
-      <section className="ab-trust-strip py-12">
+      {/* Trust strip — on parchment background, no maroon band */}
+      <section className="ab-trust-strip ab-trust-strip--light py-12">
         <div className="max-w-7xl mx-auto px-4">
           <p className="ab-trust-strip-heading text-center text-xs uppercase tracking-[0.2em] mb-8 font-semibold">Why Families Trust Us</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
             {TRUST_BADGES.map((b, i) => {
               const Icon = TRUST_ICONS[i % TRUST_ICONS.length];
               return (
-                <div key={b.title} className="text-center px-2">
-                  <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-[#c9a227]/15 border border-[#c9a227]/30 flex items-center justify-center">
-                    <Icon size={20} className="text-[#c9a227]" />
+                <div key={b.title} className="ab-trust-strip-item text-center px-2">
+                  <div className="ab-trust-strip-icon mx-auto mb-3">
+                    <Icon size={20} />
                   </div>
-                  <h4 className="font-semibold text-white mb-1.5 text-sm">{b.title}</h4>
-                  <p className="text-xs text-[#e8d48b]/65 leading-relaxed">{b.desc}</p>
+                  <h4 className="ab-trust-strip-title font-semibold mb-1.5 text-sm">{b.title}</h4>
+                  <p className="ab-trust-strip-desc text-xs leading-relaxed">{b.desc}</p>
                 </div>
               );
             })}

@@ -102,7 +102,7 @@ export default function AboutPage({ onShopCategory }: AboutPageProps) {
       </div>
 
       {/* Core values */}
-      <section className="ab-store-section ab-store-section--white">
+      <section className="ab-store-section ab-about-values-band py-14">
         <div className="ab-store-container">
           <RoyalSectionHeader
             badge="Our Values"
@@ -126,14 +126,13 @@ export default function AboutPage({ onShopCategory }: AboutPageProps) {
         </div>
       </section>
 
-      {/* Royal promise — maroon band */}
-      <section className="ab-store-section ab-store-section--maroon ab-about-promise-band py-14">
+      {/* Royal promise — on parchment, dark readable text */}
+      <section className="ab-store-section ab-about-promise-band ab-about-promise-band--light py-14">
         <div className="ab-store-container">
           <RoyalSectionHeader
             badge="Our Promise"
             title="The Agraharam Way"
             subtitle="Three pillars that guide everything we prepare and deliver"
-            onDark
           />
           <div className="ab-royal-cards-grid ab-royal-cards-grid--3">
             {ABOUT_PROMISE.map((item, i) => {

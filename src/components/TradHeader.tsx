@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ShoppingCart, User, ChevronDown, Menu, X, LogOut, Search } from 'lucide-react';
 import { SHOP_CATEGORIES } from '../data/siteContent';
+import agraharaLogo from '../assets/agrahara-logo-circle.png';
 
 interface TradHeaderProps {
   currentTab: string;
@@ -70,12 +71,12 @@ export default function TradHeader({
   }, [shopOpen, accountOpen]);
 
   return (
-    <header className="ab-site-header fixed top-0 left-0 right-0 w-full z-[150] backdrop-blur-md shadow-sm no-print animate-header-enter isolate">
+    <header className="ab-site-header fixed top-0 left-0 right-0 w-full z-[150] shadow-sm no-print animate-header-enter isolate">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-[76px] gap-4">
           <button onClick={() => onChangeTab('home')} className="flex items-center gap-3 shrink-0 group">
-            <div className="w-11 h-11 rounded-full bg-[#5c1a1b] border-2 border-[#c9a227] flex items-center justify-center text-[#f5e6b8] font-bold text-sm shadow-md group-hover:shadow-lg transition-shadow">
-              AB
+            <div className="ab-logo-image-wrap ab-logo-image-wrap--header">
+              <img src={agraharaLogo} alt="Agrahara Bhojanam" className="ab-logo-image" />
             </div>
             <div className="hidden sm:block text-left">
               <p className="ab-header-brand-title font-serif font-bold text-base md:text-lg leading-tight">Agrahara Bhojanam</p>

@@ -26,7 +26,7 @@ export default function ProductCard({ product, onSelect, onAddToCart, onPreview,
       className="ab-product-card cursor-pointer group"
       onClick={() => onSelect(product)}
     >
-      <div className="ab-product-img-wrap relative h-44 bg-[#fff8f0] flex items-center justify-center p-4">
+      <div className="ab-product-img-wrap relative h-44 flex items-center justify-center p-4">
         <img
           src={product.images[0]}
           alt={product.name}
@@ -55,7 +55,7 @@ export default function ProductCard({ product, onSelect, onAddToCart, onPreview,
           </button>
         </div>
       </div>
-      <div className="p-4 border-t border-[#c9a227]/10">
+      <div className="p-4">
         <h3 className="ab-product-title text-sm font-semibold text-[#2c1810] line-clamp-2 mb-1 group-hover:text-[#5c1a1b] transition-colors font-serif">
           {product.name}
         </h3>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Instagram, Facebook, Youtube } from 'lucide-react';
 import { STORE_WHATSAPP_DISPLAY } from '../constants/contact';
+import agraharaLogo from '../assets/agrahara-logo-circle.png';
 
 interface TradFooterProps {
   onChangeTab: (tab: string) => void;
@@ -51,32 +52,49 @@ export default function TradFooter({ onChangeTab }: TradFooterProps) {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
             {/* Brand */}
-            <div className="space-y-4 sm:col-span-2 lg:col-span-1">
+            <div className="ab-footer-brand-block space-y-4 sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-3">
-                <div className="ab-footer-logo-ring">AB</div>
-                <h3 className="ab-footer-brand-name">Agrahara Bhojanam</h3>
+                <div className="ab-logo-image-wrap ab-logo-image-wrap--footer">
+                  <img src={agraharaLogo} alt="Agrahara Bhojanam" className="ab-logo-image" />
+                </div>
+                <div>
+                  <h3 className="ab-footer-brand-name">Agrahara Bhojanam</h3>
+                  <p className="ab-footer-brand-tag">Traditional Homemade Foods</p>
+                </div>
               </div>
               <p className="ab-footer-desc max-w-sm">
-                Authentic Brahmin traditional foods from Madurai — royal recipes passed through agraharam generations, crafted with purity and devotion.
+                Authentic Brahmin traditional foods from Madurai, crafted with purity, devotion, and recipes passed through agraharam generations.
               </p>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h4 className="ab-footer-heading">Quick Links</h4>
+              <h4 className="ab-footer-heading">Shop</h4>
               <ul className="space-y-2.5">
-                <li><button type="button" onClick={() => onChangeTab('about')} className="ab-footer-link cursor-pointer">About</button></li>
-                <li><button type="button" onClick={() => onChangeTab('contact')} className="ab-footer-link cursor-pointer">Contact</button></li>
-                <li><button type="button" onClick={() => onChangeTab('refund-policy')} className="ab-footer-link cursor-pointer">Terms and Conditions</button></li>
-                <li><button type="button" onClick={() => onChangeTab('privacy-policy')} className="ab-footer-link cursor-pointer">Privacy Policy</button></li>
+                <li><button type="button" onClick={() => onChangeTab('products')} className="ab-footer-link cursor-pointer">All Products</button></li>
+                <li><button type="button" onClick={() => onChangeTab('products')} className="ab-footer-link cursor-pointer">Sambar Podi</button></li>
+                <li><button type="button" onClick={() => onChangeTab('products')} className="ab-footer-link cursor-pointer">Rasam Podi</button></li>
+                <li><button type="button" onClick={() => onChangeTab('products')} className="ab-footer-link cursor-pointer">Curry Podi</button></li>
                 <li><a href={ADMIN_URL} target="_blank" rel="noopener noreferrer" className="ab-footer-link">Admin Panel</a></li>
               </ul>
             </div>
 
             {/* Locate Us */}
             <div>
-              <h4 className="ab-footer-heading">Locate Us</h4>
-              <ul className="space-y-3">
+              <h4 className="ab-footer-heading">Information</h4>
+              <ul className="space-y-2.5">
+                <li><button type="button" onClick={() => onChangeTab('about')} className="ab-footer-link cursor-pointer">Our Heritage</button></li>
+                <li><button type="button" onClick={() => onChangeTab('contact')} className="ab-footer-link cursor-pointer">Contact Us</button></li>
+                <li><button type="button" onClick={() => onChangeTab('shipping')} className="ab-footer-link cursor-pointer">Shipping & Delivery</button></li>
+                <li><button type="button" onClick={() => onChangeTab('refund-policy')} className="ab-footer-link cursor-pointer">Returns & Refunds</button></li>
+                <li><button type="button" onClick={() => onChangeTab('privacy-policy')} className="ab-footer-link cursor-pointer">Privacy Policy</button></li>
+              </ul>
+            </div>
+
+            {/* Follow Us */}
+            <div>
+              <h4 className="ab-footer-heading">Stay Connected</h4>
+              <ul className="space-y-3 mb-5">
                 <li className="flex gap-2.5 ab-footer-link items-start">
                   <MapPin size={16} className="shrink-0 mt-0.5 text-[#d4a017]" />
                   <span>Madurai, Tamil Nadu 625001</span>
@@ -90,11 +108,6 @@ export default function TradFooter({ onChangeTab }: TradFooterProps) {
                   <span>admin@agraharabhojanam.com</span>
                 </li>
               </ul>
-            </div>
-
-            {/* Follow Us */}
-            <div>
-              <h4 className="ab-footer-heading">Follow Us</h4>
               <div className="flex gap-3">
                 <a href="#" className="ab-footer-social" aria-label="Instagram"><Instagram size={17} /></a>
                 <a href="#" className="ab-footer-social" aria-label="Facebook"><Facebook size={17} /></a>

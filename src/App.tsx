@@ -279,7 +279,7 @@ export default function App() {
   };
 
   return (
-    <div className="ab-app-shell min-h-screen flex flex-col text-[#2c1810] relative bg-[#fffbf5]">
+    <div className="ab-app-shell min-h-screen flex flex-col text-[#2c1810] relative">
       <div className="relative z-10 flex flex-col min-h-screen flex-1">
       <TradHeader
         currentTab={currentTab}
@@ -300,7 +300,7 @@ export default function App() {
         </div>
       )}
 
-      <main className="flex-1 w-full pt-16 md:pt-20">
+      <main className="flex-1 w-full">
         {['home', 'about', 'products', 'product-details', 'product-preview', 'product-reviews', 'contact', 'privacy-policy', 'refund-policy', 'shipping'].includes(currentTab) && (
           <PublicPages
             currentTab={currentTab}
