@@ -47,7 +47,6 @@ export default defineConfig(({ mode }) => {
   const previewPort = Number(env.VITE_PREVIEW_PORT || 5001);
 
   return {
-    base: './',
     plugins: [
       react(),
       tailwindcss(),
